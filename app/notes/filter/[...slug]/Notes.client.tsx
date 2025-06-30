@@ -21,17 +21,21 @@ type NotesResponse = {
 
 type NotesClientProps = {
   initialData: NotesResponse;
+  filterTag?: string;
 };
 
-export default function NotesClient({ initialData }: NotesClientProps) {
+export default function NotesClient({
+  initialData,
+  filterTag,
+}: NotesClientProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedQuery] = useDebounce(searchQuery, 500);
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data, isLoading, isError } = useQuery<NotesResponse>({
-    queryKey: ['notes', debouncedQuery, page],
-    queryFn: () => fetchNotes(page, debouncedQuery),
+    queryKey: ['notes', debouncedQuery, page, filterTag],
+    queryFn: () => fetchNotes(page, debouncedQuery, filterTag),
     placeholderData: keepPreviousData,
     initialData: debouncedQuery === '' && page === 1 ? initialData : undefined,
   });
