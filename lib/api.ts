@@ -16,11 +16,6 @@ export type Tag = {
   name: string;
 };
 
-export const getTags = async (): Promise<Tag[]> => {
-  const response = await instance.get<Tag[]>('/notes');
-  return response.data;
-};
-
 export const fetchNoteById = async (id: number) => {
   const { data } = await instance.get<Note>(`/notes/${id}`);
   return data;

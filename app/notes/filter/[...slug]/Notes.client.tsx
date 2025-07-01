@@ -6,8 +6,9 @@ import { useQuery, keepPreviousData } from '@tanstack/react-query';
 
 import SearchBox from '@/components/SearchBox/SearchBox';
 import NoteList from '@/components/NoteList/NoteList';
-import NoteModal from '@/components/NoteModal/NoteModal';
+import Modal from '@/components/Modal/Modal';
 import Pagination from '@/components/Pagination/Pagination';
+import NoteForm from '@/components/NoteForm/NoteForm';
 
 import { fetchNotes } from '@/lib/api';
 import type { Note } from '@/types/note';
@@ -71,7 +72,11 @@ export default function NotesClient({
         </>
       )}
 
-      {isModalOpen && <NoteModal onClose={closeModal} />}
+      {isModalOpen && (
+        <Modal onClose={closeModal}>
+          <NoteForm onClose={closeModal} />
+        </Modal>
+      )}
     </div>
   );
 }

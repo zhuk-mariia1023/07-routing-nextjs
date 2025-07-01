@@ -5,15 +5,20 @@ import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="page-body">
         <TanStackProvider>
           <Header />
-          {children}
+          <main className="page-main">
+            {children}
+            {modal}
+          </main>
           <Footer />
         </TanStackProvider>
       </body>

@@ -1,10 +1,15 @@
 import Link from 'next/link';
-import { getTags } from '@/lib/api';
-import css from '@/components/SidebarNotes/SidebarNotes.module.css';
+import css from './SidebarNotes.module.css';
 
-const SidebarNotes = async () => {
-  const tags = await getTags();
+const tags = [
+  { id: '1', name: 'Work' },
+  { id: '2', name: 'Personal' },
+  { id: '3', name: 'Meeting' },
+  { id: '4', name: 'Shopping' },
+  { id: '5', name: 'Todo' },
+];
 
+const SidebarNotes = () => {
   return (
     <ul className={css.menuList}>
       <li className={css.menuItem}>
