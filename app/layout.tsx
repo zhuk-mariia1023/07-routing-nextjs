@@ -12,15 +12,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="page-body">
-        <TanStackProvider>
-          <Header />
-          <main className="page-main">
-            {children}
-            {modal}
-          </main>
-          <Footer />
-        </TanStackProvider>
+      <body>
+        <div className="page-body">
+          <TanStackProvider>
+            <Header />
+            <main className="page-main">
+              {children}
+              {modal}
+            </main>
+            <Footer />
+          </TanStackProvider>
+        </div>
       </body>
     </html>
   );
