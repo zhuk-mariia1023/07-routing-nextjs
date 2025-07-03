@@ -1,7 +1,6 @@
 'use client';
 
 import { ReactNode, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
 import ReactDOM from 'react-dom';
 import css from './Modal.module.css';
 
@@ -11,11 +10,9 @@ type ModalProps = {
 };
 
 const Modal = ({ children, onClose }: ModalProps) => {
-  const router = useRouter();
-
   const close = useCallback(() => {
-    router.back();
-  }, [router]);
+    onClose();
+  }, [onClose]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -40,7 +37,7 @@ const Modal = ({ children, onClose }: ModalProps) => {
     >
       <div className={css.modal} onClick={e => e.stopPropagation()}>
         {children}
-        <button onClick={onClose}>Close</button>
+        <button onClick={close}>Close</button>
       </div>
     </div>,
     document.body

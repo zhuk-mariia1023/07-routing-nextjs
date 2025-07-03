@@ -3,7 +3,16 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import css from './TagsMenu.module.css';
-import { Tag } from '@/lib/api';
+import type { Tag } from '@/types/note';
+
+const allowedTags = [
+  'Todo',
+  'Work',
+  'Personal',
+  'Meeting',
+  'Shopping',
+] as const;
+type AllowedTag = (typeof allowedTags)[number];
 
 type TagsMenuProps = {
   tags: Tag[];
@@ -12,6 +21,10 @@ type TagsMenuProps = {
 const TagsMenu = ({ tags }: TagsMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+
+  const filteredTags = tags.filter(tag =>
+    allowedTags.includes(tag.name as AllowedTag)
+  );
 
   return (
     <div className={css.menuContainer}>
@@ -29,7 +42,7 @@ const TagsMenu = ({ tags }: TagsMenuProps) => {
               All notes
             </Link>
           </li>
-          {tags.map(tag => (
+          {filteredTags.map(tag => (
             <li key={tag.id} className={css.menuItem}>
               <Link
                 href={`/notes/filter/${tag.name}`}

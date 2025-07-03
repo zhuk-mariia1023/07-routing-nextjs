@@ -1,39 +1,28 @@
 'use client';
 
-import { fetchNoteById } from '@/lib/api';
 import css from './NotePreview.module.css';
-import { useQuery } from '@tanstack/react-query';
+import type { Note } from '@/types/note';
 
 type NotePreviewProps = {
-  id: number;
+  note: Note;
   onClose: () => void;
 };
 
-export default function NotePreview({ id, onClose }: NotePreviewProps) {
-  const { data: note } = useQuery({
-    queryKey: ['note', id],
-    queryFn: () => fetchNoteById(id),
-    refetchOnMount: false,
-  });
-
+export default function NotePreview({ note, onClose }: NotePreviewProps) {
   return (
-    <>
-      {note && (
-        <div className={css.container}>
-          <div className={css.item}>
-            <div className={css.header}>
-              <h2>{note.title}</h2>
-              <button className={css.backBtn} onClick={onClose}>
-                Go back
-              </button>
-            </div>
-            <p className={css.content}>{note.content}</p>
-            <p className={css.date}>
-              {new Date(note.createdAt).toLocaleDateString()}
-            </p>
-          </div>
+    <div className={css.container}>
+      <div className={css.item}>
+        <div className={css.header}>
+          <h2>{note.title}</h2>
+          <button className={css.backBtn} onClick={onClose}>
+            Go back
+          </button>
         </div>
-      )}
-    </>
+        <p className={css.content}>{note.content}</p>
+        <p className={css.date}>
+          {new Date(note.createdAt).toLocaleDateString()}
+        </p>
+      </div>
+    </div>
   );
 }

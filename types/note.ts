@@ -12,3 +12,8 @@ export type NewNote = {
   content: string;
   tag: string;
 };
+
+export type Tag = {
+  id: string;
+  name: string;
+};

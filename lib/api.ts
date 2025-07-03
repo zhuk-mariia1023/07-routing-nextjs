@@ -11,11 +11,6 @@ const instance = axios.create({
   },
 });
 
-export type Tag = {
-  id: string;
-  name: string;
-};
-
 export const fetchNoteById = async (id: number) => {
   const { data } = await instance.get<Note>(`/notes/${id}`);
   return data;
